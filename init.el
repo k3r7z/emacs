@@ -1,33 +1,53 @@
-
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/"))
-
+;; --- Basic UI Settings ---
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
+(hl-line-mode t)
+(blink-cursor-mode -1)
 
-;; theme
-(load-theme 'doom-nord)
-
-(setq package-enable-at-startup nil)
-(package-initialize) 
-(require 'evil)
-
+;; --- LINE NUMBERING  ---
 (setq display-line-numbers-type 'relative)
-(global-display-line-numbers-mode)
 
-;; PDF Tools
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+
+;; --- FONT ---
+(set-frame-font "JetBrainsMono Nerd Font" nil t) ;; Font type
+
+
+;; --- C/C++ INDENTATION ---
+(setq c-default-style "k&r")
+(setq c-basic-offset 4)
+
+
+;; --- PACKAGE MANAGEMENT ---
+(require 'package)
+(setq package-archives '(
+			 ("melpa" . "https://melpa.org/packages/")
+			 ("org" . "https://orgmode.org/elpa/")
+			 ("elpa" . "https://elpa.gnu.org/packages/")
+			 )
+      )
+
 (package-initialize)
-(require 'pdf-tools)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+
+;; --- THEME LOADING ---
+(use-package dracula-theme :ensure t)
+(load-theme 'dracula t)
+(custom-set-variables '(custom-safe-themes (quote (t))))
+
+;; --- PDF Tools ---
 (use-package pdf-tools
   :ensure t
   :config
   (pdf-tools-install) ;; compiles the C parts and sets up
   (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode)))
 
-(blink-cursor-mode -1)
-
+;; --- Expand region ---
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
 
 ;; Enable lsp-mode
 (add-hook 'latex-mode-hook #'lsp-latex-enable)
@@ -44,5 +64,4 @@
 ;; Org mode & Org agenda
 (setq org-agenda-files '("~"))
 
-(use-package expand-region
-  :bind ("C-=" . er/expand-region))
+

@@ -4,14 +4,17 @@
 (menu-bar-mode -1)
 (hl-line-mode t)
 (blink-cursor-mode -1)
+(toggle-truncate-lines -1)
 
 ;; --- LINE NUMBERING  ---
 (setq display-line-numbers-type 'relative)
-
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 ;; --- FONT ---
-(set-frame-font "JetBrainsMono Nerd Font" nil t) ;; Font type
+;;d(set-frame-font "JetBrainsMono Nerd Font Mono" nil t)
+;;(set-frame-font "FiraCode Nerd Font" nil t)
+;;(set-frame-font "BlexMono Nerd Font" nil t)
+(set-frame-font "Terminess Nerd Font Mono" nil t)
 
 
 ;; --- C/C++ INDENTATION ---

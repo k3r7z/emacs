@@ -13,8 +13,6 @@
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
 
-;; --- FONT ---
-(set-frame-font "JetBrainsMono Nerd Font Mono-12" nil t)
 
 ;; ==========================================
 ;; 2. PACKAGE MANAGEMENT & BACKUPS
@@ -78,6 +76,7 @@
 ;; 4. UNIFIED LSP MODE CONFIGURATION (C, Octave, LaTeX)
 ;; ==========================================
 (use-package lsp-mode
+  :ensure t
   :commands (lsp lsp-deferred)
   ;; Hook lsp into LaTeX, Octave, C, and C++ modes
   :hook ((LaTeX-mode . lsp-deferred)
@@ -183,8 +182,8 @@
 ;; ==========================================
 ;; 6. ORG MODE & ORG MODERN CONFIGURATION
 ;; ==========================================
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 110)
-(set-face-attribute 'variable-pitch nil :font "FiraCode Nerd Font Mono" :height 1.15)
+;(set-face-attribute 'default nil :font "IosevkaTermSlab Nerd Font Propo-11")
+(set-face-attribute 'default nil :font "Inconsolata Nerd Font Mono-17")
 (add-hook 'org-mode-hook 'variable-pitch-mode)
 
 (setq org-agenda-files '("~"))
@@ -233,12 +232,8 @@
      "3613617b9953c22fe46ef2b593a2e5bc79ef3cc88770602e7e569bbd71de113b"
      default))
  '(package-selected-packages
-   '(ac-clang auctex catppuccin-theme company cyberpunk-theme doom-themes
-	      dracula-theme evil evil-collection expand-region
-	      glsl-mode gruvbox-theme lsp-latex magit move-text
-	      org-appear org-bullets org-modern org-roam pdf-tools
-	      projectile transpose-frame treemacs-all-the-icons
-	      yaml-mode yasnippet)))
+   '(auctex cdlatex company glsl-mode lsp-mode magit move-text org-appear
+	    org-fragtog org-modern pdf-tools yasnippet)))
 
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
